@@ -1,0 +1,27 @@
+{
+  "name": "string-calculator-kata",
+  "version": "1.0.0",
+  "description": "The following is a TDD Kata, an exercise in coding, refactoring and test-first, that you should apply daily for at least 15-30 minutes.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "m.test": "0.0.44"
+  },
+  "scripts": {
+    "test": "m.test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilbonte/string-calculator-kata.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ilbonte/string-calculator-kata/issues"
+  },
+  "homepage": "https://github.com/ilbonte/string-calculator-kata#readme"
+}
