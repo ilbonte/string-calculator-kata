@@ -13,7 +13,7 @@ module.exports = class StringCalculator {
     }
 
     if (isValidInput(stringNumber)) {
-      const numbers = stringNumber.replace('\n', ',').split(',')
+      const numbers = extractNumbersFromString(stringNumber)
       return numbers.filter(number => parseInt(number) < 1000).reduce((total, number) => total += parseInt(number), 0)
     } else {
       if (hasNegativeNumbers(stringNumber)) {
@@ -22,6 +22,10 @@ module.exports = class StringCalculator {
       return () => { throw new Error('invalid input') }
     }
   }
+}
+
+function extractNumbersFromString(stringNumber){
+  return stringNumber.replace('\n', ',').split(',')
 }
 
 function getNegativeNumbersFromString(stringNumber){
