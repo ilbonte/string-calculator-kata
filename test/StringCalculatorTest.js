@@ -52,3 +52,11 @@ test("should throw exception with negative number", function(){
 
   throws(calculator.add("-1,2,-3"), /negatives not allowed: -1,-3/)
 })
+
+test("should ignore number greather than 1000", function(){
+   const calculator = new StringCalculator()
+
+  const result = calculator.add("2,1000")
+
+  equal(2, result)
+})

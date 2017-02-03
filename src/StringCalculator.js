@@ -12,7 +12,7 @@ module.exports = class StringCalculator {
 
       if (isValidInput(stringNumber)) {
         const numbers = stringNumber.replace('\n', ',').split(',')
-        return numbers.reduce((total, number) => total += parseInt(number), 0)
+        return numbers.filter(number => parseInt(number)<1000).reduce((total, number) => total += parseInt(number), 0)
       } else {
         if(/-\d*/.test(stringNumber)){
           return () => { throw new Error(`negatives not allowed: ${stringNumber.match(/-\d*/g).toString()}`) }        
