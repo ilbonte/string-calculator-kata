@@ -4,31 +4,43 @@ module.exports = class StringCalculator {
   }
 
   add(stringNumber) {
-    if (stringNumber) {
-      if (hasCustomDelimiters(stringNumber)) {
-        const customDelimiter = stringNumber.match(/\/\/(.)\n.+/)[1]
-        stringNumber = stringNumber.substr(4).replace(new RegExp(customDelimiter, 'g'), ',')
-      }
-
-      if (isValidInput(stringNumber)) {
-        const numbers = stringNumber.replace('\n', ',').split(',')
-        return numbers.filter(number => parseInt(number)<1000).reduce((total, number) => total += parseInt(number), 0)
-      } else {
-        if(/-\d*/.test(stringNumber)){
-          return () => { throw new Error(`negatives not allowed: ${stringNumber.match(/-\d*/g).toString()}`) }        
-        }
-        return () => { throw new Error('invalid input') }
-      }
+    if (stringNumber.length === 0) {
+      return ""
     }
 
-    return ""
+    if (hasCustomDelimiters(stringNumber)) {
+      stringNumber = normalizeInputString(stringNumber)
+    }
+
+    if (isValidInput(stringNumber)) {
+      const numbers = stringNumber.replace('\n', ',').split(',')
+      return numbers.filter(number => parseInt(number) < 1000).reduce((total, number) => total += parseInt(number), 0)
+    } else {
+      if (hasNegativeNumbers(stringNumber)) {
+        return () => { throw new Error(`negatives not allowed: ${stringNumber.match(/-\d*/g).toString()}`) }
+      }
+      return () => { throw new Error('invalid input') }
+    }
   }
 }
 
-function hasCustomDelimiters(string){
+function hasNegativeNumbers(stringNumber){
+  return /-\d*/.test(stringNumber)
+}
+
+function normalizeInputString(stringNumber){
+  const customDelimiter = extractCustomDelimiter(stringNumber)
+  return stringNumber.substr(4).replace(new RegExp(customDelimiter, 'g'), ',')
+}
+
+function extractCustomDelimiter(stringNumber){
+  return stringNumber.match(/\/\/(.)\n.+/)[1]
+}
+
+function hasCustomDelimiters(string) {
   return /\/\/.\n.+/.test(string)
 }
 
-function isValidInput(string){
- return /^\d+(([,\n]\d+)+|$)$/.test(string)
+function isValidInput(string) {
+  return /^\d+(([,\n]\d+)+|$)$/.test(string)
 }
