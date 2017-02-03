@@ -1,4 +1,4 @@
-const {equal} = require('assert')
+const {equal,throws} = require('assert')
 const StringCalculator = require('../src/StringCalculator')
 
 test("should return 0 for an empty string", function () {
@@ -23,4 +23,12 @@ test("should return the sum of the number passed as argument", function () {
   const result = calculator.add("1,2,3,4")
 
   equal(10, result)
+})
+
+test("should calculate even if the delimiter is \\n", function(){
+   const calculator = new StringCalculator()
+
+  const result = calculator.add("1\n2,3")
+
+  equal(6, result)
 })

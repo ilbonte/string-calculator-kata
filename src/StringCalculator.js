@@ -5,7 +5,7 @@ module.exports = class StringCalculator{
 
   add(stringNumber){
     if(stringNumber){
-      const numbers  = stringNumber.split(',')
+      const numbers  = stringNumber.replace('\n',',').split(',')
       return numbers.reduce((total, number) =>  total+=parseInt(number), 0)
     }
     
