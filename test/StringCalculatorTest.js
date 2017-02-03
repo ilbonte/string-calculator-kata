@@ -47,3 +47,8 @@ test("should support custom delimiters", function(){
   equal(6, result)
 })
 
+test("should throw exception with negative number", function(){
+  const calculator = new StringCalculator()
+
+  throws(calculator.add("-1,2,-3"), /negatives not allowed: -1,-3/)
+})
