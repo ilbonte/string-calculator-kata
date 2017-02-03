@@ -14,7 +14,7 @@ module.exports = class StringCalculator {
 
     if (isValidInput(stringNumber)) {
       const numbers = extractNumbersFromString(stringNumber)
-      return numbers.filter(number => parseInt(number) < 1000).reduce((total, number) => total += parseInt(number), 0)
+      return numbers.filter(numbesLowerThan(1000)).reduce((total, number) => total += parseInt(number), 0)
     } else {
       if (hasNegativeNumbers(stringNumber)) {
         return () => { throw new Error(`negatives not allowed: ${getNegativeNumbersFromString(stringNumber)}`) }
@@ -22,6 +22,10 @@ module.exports = class StringCalculator {
       return () => { throw new Error('invalid input') }
     }
   }
+}
+
+function numbesLowerThan(expected) {
+  return number => parseInt(number) < expected
 }
 
 function extractNumbersFromString(stringNumber){
