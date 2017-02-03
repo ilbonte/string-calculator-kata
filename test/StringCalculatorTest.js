@@ -38,3 +38,12 @@ test("should throw an error if there are 2 delimiters one after the other", func
 
   throws(calculator.add("1,\n"), Error)
 })
+
+test("should support custom delimiters", function(){
+  const calculator = new StringCalculator()
+
+  const result = calculator.add("//;\n1;2;3")
+
+  equal(6, result)
+})
+
