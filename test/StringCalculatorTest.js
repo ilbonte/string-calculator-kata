@@ -32,3 +32,9 @@ test("should calculate even if the delimiter is \\n", function(){
 
   equal(6, result)
 })
+
+test("should throw an error if there are 2 delimiters one after the other", function(){
+   const calculator = new StringCalculator()
+
+  throws(calculator.add("1,\n"), Error)
+})
